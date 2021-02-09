@@ -1,8 +1,11 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `MySzama`,
+    description: `Food site with recipes`,
+    author: `@kudlaty`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -15,6 +18,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -25,6 +29,20 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+          authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+          databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
+          projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+          storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
+          appId: process.env.GATSBY_FIREBASE_APP_ID,
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
